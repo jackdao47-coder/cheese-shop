@@ -9,6 +9,16 @@ struct cheese_data
     int price_per_kg;
 };
 
+struct cheese_shop_data {
+    dynamic_array<cheese_data> cheeses;
+};
+
 cheese_data new_cheese(string name = "", double weight = 0.0, int price_per_kg = 0);
 
 string cheese_to_string(const cheese_data &cheese, bool full_details = false);
+
+int total_cost(const cheese_data &cheese);
+
+double reduce_weight(cheese_data &cheese, double amount);
+
+void increase_weight(cheese_data &cheese, double amount);

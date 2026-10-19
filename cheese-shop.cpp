@@ -16,7 +16,8 @@ string cheese_to_string(const cheese_data &cheese, bool full_details) {
         return std::format("{}: {:.2f} kg, ${:.2f}",
         cheese.name,
         cheese.weight,
-        cheese.price_per_kg / 100.0);
+        cheese.price_per_kg / 100.0,
+        total_cost(cheese) / 100);
 
     }
     else{
@@ -24,3 +25,31 @@ string cheese_to_string(const cheese_data &cheese, bool full_details) {
     }
 }
 
+int total_cost(const cheese_data &cheese)
+{
+    return cheese.weight * cheese.price_per_kg;
+}
+
+double reduce_weight(cheese_data &cheese, double amount)
+{
+    if (amount <= 0)
+    {
+        return 0;
+    }
+
+    if (amount > cheese.weight)
+    {
+        amount = cheese.weight;
+    }
+
+    cheese.weight = cheese.weight - amount;
+    return amount;
+}
+
+void increase_weight(cheese_data &cheese, double amount)
+{
+    if (amount > 0)
+    {
+        cheese.weight = cheese.weight + amount;
+    }
+}
