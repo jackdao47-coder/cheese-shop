@@ -3,7 +3,7 @@
 #include "cheese-shop.h"
 
 void print_cheese (cheese_data data) {
-    write_line(data.name + ", " + to_string(data.weight) + "kg, $" + to_string(data.price_per_kg / 100) + " per kg");
+    write_line(cheese_to_string(data, true));
 }
 
 int main()
