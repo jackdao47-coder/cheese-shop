@@ -13,11 +13,11 @@ cheese_data new_cheese(string name, double weight, int price_per_kg)
 
 string cheese_to_string(const cheese_data &cheese, bool full_details) {
     if (full_details){
-        return std::format("{}: {:.2f} kg, ${:.2f}",
+        return std::format("{}: {:.2f} kg, ${:.2f} per kg, total ${:.2f}",
         cheese.name,
         cheese.weight,
         cheese.price_per_kg / 100.0,
-        total_cost(cheese) / 100);
+        total_cost(cheese) / 100.0);
 
     }
     else{
@@ -52,4 +52,29 @@ void increase_weight(cheese_data &cheese, double amount)
     {
         cheese.weight = cheese.weight + amount;
     }
+}
+
+void add_cheese(cheese_shop_data &shop, const cheese_data &cheese)
+{
+    shop.cheeses.add(cheese);
+}
+
+bool cheese_valid(const cheese_data &cheese, string &error_message)
+{
+    error_message = "";
+
+    if (cheese.name == "")
+    {
+        error_message += "Name is empty. ";
+    }
+    if (cheese.weight < 0)
+    {
+        error_message += "Weight cannot be negative. ";
+    }
+    if (cheese.price_per_kg < 0)
+    {
+        error_message += "Price cannot be negative. ";
+    }
+
+    return error_message == "";
 }

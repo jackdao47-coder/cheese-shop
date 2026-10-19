@@ -22,3 +22,7 @@ int total_cost(const cheese_data &cheese);
 double reduce_weight(cheese_data &cheese, double amount);
 
 void increase_weight(cheese_data &cheese, double amount);
+
+void add_cheese(cheese_shop_data &shop, const cheese_data &new_cheese);
+
+bool cheese_valid(const cheese_data &cheese, string &error_message);
