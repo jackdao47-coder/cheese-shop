@@ -78,3 +78,54 @@ bool cheese_valid(const cheese_data &cheese, string &error_message)
 
     return error_message == "";
 }
+
+int find_cheese(const cheese_shop_data &shop, const string &name)
+{
+    for (int i = 0; i < shop.cheeses.length(); i++)
+    {
+        if (to_lowercase(shop.cheeses[i].name) == to_lowercase(name))
+        {
+            return i;
+        }
+    }
+
+    return -1;
+}
+
+order_data new_order(string cheese_name, double weight)
+{
+    order_data order;
+    order.cheese_name = cheese_name;
+    order.weight = weight;
+    order.weight_supplied = 0;
+    return order;
+}
+
+string order_to_string(const order_data &order)
+{
+    return std::format("{}: {:.2f} kg ordered, {:.2f} kg supplied",
+        order.cheese_name,
+        order.weight,
+        order.weight_supplied);
+}
+
+void add_order(cheese_shop_data &shop, const order_data &order)
+{
+    shop.orders.add(order);
+}
+
+bool order_valid(const order_data &order, string &error_message)
+{
+    error_message = "";
+
+    if (order.cheese_name == "")
+    {
+        error_message += "Cheese name is empty. ";
+    }
+    if (order.weight <= 0)
+    {
+        error_message += "Weight must be greater than 0. ";
+    }
+
+    return error_message == "";
+}
